@@ -4,6 +4,9 @@
 .script-wrap:last-child{
     margin-bottom: 0;
 }
+.script-wrap.selected .script-ind{
+    background: #268c26;
+}
 .script-ind{
     background: #ffeac1;
     width:100%; 

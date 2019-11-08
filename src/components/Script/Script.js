@@ -3,46 +3,40 @@ import './Script.css';
 //import Button from '../Button/Button';
 
 class Script extends Component{
-    constructor(props) {
-        super(props);
-    }
-
-    handle(type,value) {
-        console.log(type,value);
-        this.props.handleButton(type,value);
+    handleClick(type, value){
+        this.props.handleButtonClick(type, value);
     }
 
     render() {
         let script = this.props.script;
 
         return (
-            <div className="script-wrap">
+            <div className={"script-wrap " + (script.isSelected ? 'selected' : 'not-selected')}>
                 <div className="script-ind">
-                    {script.config.title !== "" &&
+                    {script.title !== "" &&
                         <div className="script-header">
                             <div className="script-title">
-                                <h3>{script.config.title}</h3>
+                                <h3>{script.title}</h3>
                             </div>
                         </div>
                     }
 
                     <div className="script-content">
-                        <p>{script.config.message}</p>
+                        <p>{script.message}</p>
                     </div>
 
-                    {script.config.type ==="consent" &&
+                    {script.type ==="consent" && //script.isSelected === false &&
                     <div className="script-footer">
-                        <button onClick = {this.handle}>Test</button>
-                        <button onClick={(e) => this.handle(script.config.type,'Never')}>Never</button>
-                        <button onClick={(e) => this.handle(script.config.type,'Not Now')}>Not Now</button>
-                        <button onClick={(e) => this.handle(script.config.type,'Interested')}>Interested</button>
+                        <button onClick={this.handleClick.bind(this, script.type,"Never")}>Never</button>
+                        <button onClick={this.handleClick.bind(this, script.type,"Not Now")}>Not Now</button>
+                        <button onClick={this.handleClick.bind(this, script.type,"Interested")}>Interested</button>
                     </div>
                     }
 
-                    {script.config.type ==="optin" &&
+                    {script.type ==="optin" &&
                     <div className="script-footer">
-                        <button onClick={(e) => this.handle(script.config.type,'Yes')}>Yes</button>
-                        <button onClick={(e) => this.handle(script.config.type,'No')}>No</button>
+                        <button onClick={this.handleClick.bind(this, script.type,'Yes')}>Yes</button>
+                        <button onClick={this.handleClick.bind(this, script.type,'No')}>No</button>
                     </div>
                     }
                 </div>
